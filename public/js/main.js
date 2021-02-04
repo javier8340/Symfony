@@ -105,19 +105,19 @@ $(window).on('scroll', function() {
       new WOW().init();
 
       // one page navigation 
-      $('.main-navigation').onePageNav({
-              currentClass: 'active'
-      });
+      // $('.main-navigation').onePageNav({
+      //         currentClass: 'active'
+      // });
 
       
   });
 
   jQuery(document).ready(function() {
      
-      $('body').scrollspy({
-          target: '.navbar-collapse',
-          offset: 195
-      });
+      // $('body').scrollspy({
+      //     target: '.navbar-collapse',
+      //     offset: 195
+      // });
 
       $(window).on('scroll', function() {
           if ($(window).scrollTop() > 200) {

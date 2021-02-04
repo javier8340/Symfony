@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\JuegoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,6 +39,16 @@ class Juego
      * @ORM\JoinColumn(nullable=false)
      */
     private $categoria;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Estadistica::class, mappedBy="juego")
+     */
+    private $estadisticas;
+
+    public function __construct()
+    {
+        $this->estadisticas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -87,6 +99,36 @@ class Juego
     public function setCategoria(?Categoria $categoria): self
     {
         $this->categoria = $categoria;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Estadistica[]
+     */
+    public function getEstadisticas(): Collection
+    {
+        return $this->estadisticas;
+    }
+
+    public function addEstadistica(Estadistica $estadistica): self
+    {
+        if (!$this->estadisticas->contains($estadistica)) {
+            $this->estadisticas[] = $estadistica;
+            $estadistica->setJuego($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEstadistica(Estadistica $estadistica): self
+    {
+        if ($this->estadisticas->removeElement($estadistica)) {
+            // set the owning side to null (unless already changed)
+            if ($estadistica->getJuego() === $this) {
+                $estadistica->setJuego(null);
+            }
+        }
 
         return $this;
     }

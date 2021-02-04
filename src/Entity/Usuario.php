@@ -80,6 +80,16 @@ class Usuario implements UserInterface
      */
     private $notificacion;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Estadistica::class, mappedBy="usuario")
+     */
+    private $estadisticas;
+
+    /**
+     * @ORM\OneToMany(targetEntity=RecompensasObtenidas::class, mappedBy="usuario")
+     */
+    private $recompensasObtenidas;
+
 
 
 
@@ -88,6 +98,7 @@ class Usuario implements UserInterface
     {
         $this->notificacion = new ArrayCollection();
         $this->estadisticas = new ArrayCollection();
+        $this->recompensasObtenidas = new ArrayCollection();
 
     }
 
@@ -279,6 +290,66 @@ class Usuario implements UserInterface
             // set the owning side to null (unless already changed)
             if ($notificacione->getReceiver() === $this) {
                 $notificacione->setReceiver(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Estadistica[]
+     */
+    public function getEstadisticas(): Collection
+    {
+        return $this->estadisticas;
+    }
+
+    public function addEstadistica(Estadistica $estadistica): self
+    {
+        if (!$this->estadisticas->contains($estadistica)) {
+            $this->estadisticas[] = $estadistica;
+            $estadistica->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEstadistica(Estadistica $estadistica): self
+    {
+        if ($this->estadisticas->removeElement($estadistica)) {
+            // set the owning side to null (unless already changed)
+            if ($estadistica->getUsuario() === $this) {
+                $estadistica->setUsuario(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RecompensasObtenidas[]
+     */
+    public function getRecompensasObtenidas(): Collection
+    {
+        return $this->recompensasObtenidas;
+    }
+
+    public function addRecompensasObtenida(RecompensasObtenidas $recompensasObtenida): self
+    {
+        if (!$this->recompensasObtenidas->contains($recompensasObtenida)) {
+            $this->recompensasObtenidas[] = $recompensasObtenida;
+            $recompensasObtenida->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecompensasObtenida(RecompensasObtenidas $recompensasObtenida): self
+    {
+        if ($this->recompensasObtenidas->removeElement($recompensasObtenida)) {
+            // set the owning side to null (unless already changed)
+            if ($recompensasObtenida->getUsuario() === $this) {
+                $recompensasObtenida->setUsuario(null);
             }
         }
 
