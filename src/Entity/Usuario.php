@@ -76,13 +76,19 @@ class Usuario implements UserInterface
     private $amigos;
 
     /**
-     * @ORM\OneToMany(targetEntity=Notificaciones::class, mappedBy="receiver")
+     * @ORM\OneToMany(targetEntity=Notificacion::class, mappedBy="receiver")
      */
-    private $notificaciones;
+    private $notificacion;
+
+
+
+
 
     public function __construct()
     {
-        $this->notificaciones = new ArrayCollection();
+        $this->notificacion = new ArrayCollection();
+        $this->estadisticas = new ArrayCollection();
+
     }
 
     /**
@@ -250,26 +256,26 @@ class Usuario implements UserInterface
     }
 
     /**
-     * @return Collection|Notificaciones[]
+     * @return Collection|Notificacion[]
      */
-    public function getNotificaciones(): Collection
+    public function getNotificacion(): Collection
     {
-        return $this->notificaciones;
+        return $this->notificacion;
     }
 
-    public function addNotificacione(Notificaciones $notificacione): self
+    public function addNotificacion(Notificacion $notificacione): self
     {
-        if (!$this->notificaciones->contains($notificacione)) {
-            $this->notificaciones[] = $notificacione;
+        if (!$this->notificacion->contains($notificacione)) {
+            $this->notificacion[] = $notificacione;
             $notificacione->setReceiver($this);
         }
 
         return $this;
     }
 
-    public function removeNotificacione(Notificaciones $notificacione): self
+    public function removeNotificacion(Notificacion $notificacione): self
     {
-        if ($this->notificaciones->removeElement($notificacione)) {
+        if ($this->notificacion->removeElement($notificacione)) {
             // set the owning side to null (unless already changed)
             if ($notificacione->getReceiver() === $this) {
                 $notificacione->setReceiver(null);
@@ -278,4 +284,5 @@ class Usuario implements UserInterface
 
         return $this;
     }
+
 }

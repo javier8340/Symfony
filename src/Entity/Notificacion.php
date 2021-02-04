@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=NotificacionesRepository::class)
  */
-class Notificaciones
+class Notificacion
 {
     /**
      * @ORM\Id

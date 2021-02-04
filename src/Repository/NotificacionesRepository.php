@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Notificaciones;
+use App\Entity\Notificacion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Notificaciones|null find($id, $lockMode = null, $lockVersion = null)
- * @method Notificaciones|null findOneBy(array $criteria, array $orderBy = null)
- * @method Notificaciones[]    findAll()
- * @method Notificaciones[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Notificacion|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Notificacion|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Notificacion[]    findAll()
+ * @method Notificacion[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class NotificacionesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Notificaciones::class);
+        parent::__construct($registry, Notificacion::class);
     }
 
     // /**

@@ -9,13 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class InicioController extends AbstractController
 {
     /**
-     * @Route("/inicio", name="inicio")
+     * @Route("/", name="inicio")
      */
     public function index(): Response
     {
-        return new Response(json_encode(["hola"=>"hola"]), 200, ["Content-Type"=> "application/json"]);
-//        return $this->render('inicio/index.html.twig', [
+//        return new Response(json_encode(["hola"=>"hola"]), 200, ["Content-Type"=> "application/json"]);
+        return $this->render('inicio/index.html.twig', [
 //            'controller_name' => 'InicioController',
-//        ]);
+        ]);
     }
 }
